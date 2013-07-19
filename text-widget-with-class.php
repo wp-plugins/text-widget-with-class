@@ -1,0 +1,81 @@
+<?php
+/**
+ * Plugin Name: Text Widget with Class
+ * Description: A text widget that allows you to add a custom classes to the title tag.
+ * Version: 1.0
+ * Author: Chris LaFrombois
+ * Author URI: http://thesimonsgroup.com
+ */
+
+/* 
+ *	This is a modified version of the default text widget. It is entirely free to use, 
+ *	distribute and modify as you see fit. Good times.
+ *
+*/
+
+add_action( 'widgets_init', 'register_text_widget_with_class' );
+
+
+function register_text_widget_with_class() {
+    register_widget( 'Text_Widget_With_Class' );
+}
+
+class Text_Widget_With_Class extends WP_Widget {
+
+	function __construct() {
+		$widget_ops = array('classname' => 'widget_advanced_text', 'description' => __('This plugin allows you to add a class to the widget title tag.'));
+		$control_ops = array('width' => 400, 'height' => 350);
+		parent::__construct('advanced_text', __('Text Widget with Class'), $widget_ops, $control_ops);
+	}
+
+	function widget( $args, $instance ) {
+		extract($args);
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+		$classes = apply_filters('widget_classes', empty($instance['classes']) ? '' : $instance['classes'], $instance );
+		$text = apply_filters( 'widget_text', empty( $instance['text'] ) ? '' : $instance['text'], $instance );
+		
+		// Looks in the sidebar to find the $before_title parameter
+		// And splits it at the end quote and bracket
+		
+		$b_title = explode('">', $before_title);
+		$b_title_e = $b_title['0'];
+		
+		echo $before_widget;
+		if ( !empty( $title ) ) { echo $b_title_e . ' '. $classes . '">' . $title . $after_title; } ?>
+			<div class="textwidget"><?php echo !empty( $instance['filter'] ) ? wpautop( $text ) : $text; ?></div>
+		<?php
+		echo $after_widget;
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['classes'] = $new_instance['classes'];
+		if ( current_user_can('unfiltered_html') )
+			$instance['text'] =  $new_instance['text'];
+		else
+			$instance['text'] = stripslashes( wp_filter_post_kses( addslashes($new_instance['text']) ) ); // wp_filter_post_kses() expects slashed
+			$instance['filter'] = isset($new_instance['filter']);
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'classes'=>'' ) );
+		$title = strip_tags($instance['title']);
+		$text = esc_textarea($instance['text']);
+		$classes = strip_tags($instance['classes']);
+?>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		
+        <p><label for="<?php echo $this->get_field_id('classes');?>"><?php _e('Add Classes. Separate multiple classes by a space (no commas!)'); ?></label>
+        <input class="widefat" id="<?php echo $this->get_field_id('classes');?>" name="<?php echo $this->get_field_name('classes');?>" type="text" value="<?php echo $classes;?>" /></p>
+        
+        
+		<textarea class="widefat" rows="16" cols="20" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
+
+		<p><input id="<?php echo $this->get_field_id('filter'); ?>" name="<?php echo $this->get_field_name('filter'); ?>" type="checkbox" <?php checked(isset($instance['filter']) ? $instance['filter'] : 0); ?> />&nbsp;<label for="<?php echo $this->get_field_id('filter'); ?>"><?php _e('Automatically add paragraphs'); ?></label></p>
+<?php
+	}
+}
+?>
