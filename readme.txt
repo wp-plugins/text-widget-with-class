@@ -15,10 +15,10 @@ A text widget based on the default Wordpress text widget. Allows users to add cu
 A text widget based on the default Wordpress text widget. Allows users to add custom classes to the title tag.
 
 It takes this:
-<h3 class="widget-title">
+&lt;h3 class="widget-title">
 
 And allows you to do this:
-<h3 class="widget-title custom-class custom-class-2 etc">
+&lt;h3 class="widget-title custom-class custom-class-2 etc">
 
 == Installation ==
 
