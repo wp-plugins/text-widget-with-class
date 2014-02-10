@@ -23,8 +23,11 @@ And allows you to do this:
 == Installation ==
 
 1a. Upload `text-widget-with-class.php` to the `/wp-content/plugins/` directory
+
 1b. Or use the plugin uploader through Wordpress
+
 2. Activate the plugin through the 'Plugins' menu in WordPress
+
 3. Add widget to your sidebars.
 
 == Frequently asked questions ==
