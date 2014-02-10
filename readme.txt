@@ -3,7 +3,7 @@ Contributors: disinfor
 Donate link: Free
 Tags: Text, Widget, HTML, Classes
 Requires at least: 3.3
-Tested up to: 3.6.1
+Tested up to: 3.8.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ A text widget based on the default Wordpress text widget. Allows users to add cu
 
 == Description ==
 
-A text widget based on the default Wordpress text widget. Allows users to add custom classes to the title tag.
+A text widget based on the default Wordpress text widget. Allows users to add custom classes to the title tag. Works with the default themes.
 
 It takes this:
 &lt;h3 class="widget-title">
@@ -32,6 +32,10 @@ And allows you to do this:
 = Is this plugin awesome? =
 
 Yes it is.
+
+= Updates? =
+
+Planning on making a version that doesn't require certain classes to be present to use.
 
 == Screenshots ==
 
