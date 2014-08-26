@@ -3,16 +3,16 @@ Contributors: disinfor
 Donate link: Free
 Tags: Text, Widget, HTML, Classes
 Requires at least: 3.3
-Tested up to: 3.6.1
-Stable tag: 1.0
+Tested up to: 3.9.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A text widget based on the default Wordpress text widget. Allows users to add custom classes to the title tag.
+A text widget based on the default Wordpress text widget. Allows users to add custom classes to the widget container and the title tag.
 
 == Description ==
 
-A text widget based on the default Wordpress text widget. Allows users to add custom classes to the title tag.
+A text widget based on the default Wordpress text widget. Allows users to add custom classes to the title tag. Works with the default themes.
 
 It takes this:
 &lt;h3 class="widget-title">
@@ -23,8 +23,11 @@ And allows you to do this:
 == Installation ==
 
 1a. Upload `text-widget-with-class.php` to the `/wp-content/plugins/` directory
+
 1b. Or use the plugin uploader through Wordpress
+
 2. Activate the plugin through the 'Plugins' menu in WordPress
+
 3. Add widget to your sidebars.
 
 == Frequently asked questions ==
@@ -33,6 +36,10 @@ And allows you to do this:
 
 Yes it is.
 
+= Updates? =
+
+Planning on making a version that doesn't require certain classes to be present to use.
+
 == Screenshots ==
 
 1. No screenshot available
@@ -40,10 +47,12 @@ Yes it is.
 == Changelog ==
 
 1.0 First release
+1.1 8.26.2014 Added field to add classes to the widget container
 
 == Upgrade notice ==
 
 1.0 First release
+1.1 Second release
 
 == General Information ==
 
