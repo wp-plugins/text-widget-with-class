@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Text Widget with Class
  * Description: A text widget that allows you to add a custom classes to widget container and header.
- * Version: 1.2
+ * Version: 1.1
  * Author: Chris LaFrombois
  * Author URI: http://thesimonsgroup.com
  */
