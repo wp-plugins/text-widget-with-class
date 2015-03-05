@@ -4,7 +4,7 @@ Donate link: Free
 Tags: Text, Widget, HTML, Classes
 Requires at least: 3.3
 Tested up to: 4.1.1
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ And allows you to do this:
 It also allows users to add custom classes to the widget container.
 
 *NEW*
-If the sidebar registration in your theme's function file does not contain any HTML for before or after the title of the widget, this now will now fill that with an `<h2>` tag set.
+If the sidebar registration in your theme's function file does not contain any HTML for before or after the title of the widget, this now will now fill that with an `<h4>` tag set.
 
 == Installation ==
 
@@ -54,12 +54,14 @@ Planning on making a version that doesn't require certain classes to be present 
 1.0 First release
 1.1 8.26.2014 Added field to add classes to the widget container
 1.2 3.1.15 Addressed issue if theme function file widget initilization doesn't contain before or after title tags
+1.2.1 3.4.15 Addressed issue if only header tags were present without classes
 
 == Upgrade notice ==
 
 1.0 First release
 1.1 Second release
 1.2 Third release
+1.2.1 Minor Update
 
 == General Information ==
 

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Text Widget with Class
  * Description: A text widget that allows you to add a custom classes to widget container and header.
- * Version: 1.2
+ * Version: 1.2.1
  * Author: Chris LaFrombois
  * Author URI: http://www.orbitmedia.com
  */
@@ -46,16 +46,21 @@ class Text_Widget_With_Class extends WP_Widget {
 		
 		$b_title = '';
 		$b_title_e = '';
+		$b_strpos = strpos($before_title, '"');
+		$b_array = array('<h1>','<h2>','<h3>','<h4>','<h5>','<h6>');
 		
-		if($before_title !== '') {
+		if($before_title !== '' && $b_strpos === true) {
 			$b_title = explode('">', $before_title);
 			$b_title_e = $b_title['0'] . ' twwc-widget-title '; 
+		} elseif(in_array($before_title, $b_array)) { 
+			$b_title = explode('>', $before_title);
+			$b_title_e = $b_title[0] . ' class="widget-title twwc-widget-title ';
 		} else {
-			$b_title_e = '<h2 class="widget-title twwc-widget-title ';
+			$b_title_e = '<h4 class="widget-title twwc-widget-title ';
 		}
 		
 		if($after_title === '') {
-			$after_title = '</h2>';
+			$after_title = '</h4>';
 		}
 		
 		echo $before_widget;
