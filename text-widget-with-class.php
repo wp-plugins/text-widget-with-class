@@ -2,9 +2,9 @@
 /**
  * Plugin Name: Text Widget with Class
  * Description: A text widget that allows you to add a custom classes to widget container and header.
- * Version: 1.1
+ * Version: 1.2.1
  * Author: Chris LaFrombois
- * Author URI: http://thesimonsgroup.com
+ * Author URI: http://www.orbitmedia.com
  */
 
 /* 
@@ -35,14 +35,36 @@ class Text_Widget_With_Class extends WP_Widget {
 		$classes = apply_filters('widget_classes', empty($instance['classes']) ? '' : $instance['classes'], $instance );
 		$text = apply_filters( 'widget_text', empty( $instance['text'] ) ? '' : $instance['text'], $instance );
 		
+		/* VERSION 1.2
+		** Adds a strpos to find if the theme widget registration
+		** contains a `before` string. If not, the this will add
+		** the entire title class plus custom classes.
+		*/
+		
 		// Looks in the sidebar to find the $before_title parameter
 		// And splits it at the end quote and bracket
 		
-		$b_title = explode('">', $before_title);
-		$b_title_e = $b_title['0'];
+		$b_title = '';
+		$b_title_e = '';
+		$b_strpos = strpos($before_title, '"');
+		$b_array = array('<h1>','<h2>','<h3>','<h4>','<h5>','<h6>');
+		
+		if($before_title !== '' && $b_strpos === true) {
+			$b_title = explode('">', $before_title);
+			$b_title_e = $b_title['0'] . ' twwc-widget-title '; 
+		} elseif(in_array($before_title, $b_array)) { 
+			$b_title = explode('>', $before_title);
+			$b_title_e = $b_title[0] . ' class="widget-title twwc-widget-title ';
+		} else {
+			$b_title_e = '<h4 class="widget-title twwc-widget-title ';
+		}
+		
+		if($after_title === '') {
+			$after_title = '</h4>';
+		}
 		
 		echo $before_widget;
-		if ( !empty( $title ) ) { echo $b_title_e . ' '. $classes . '">' . $title . $after_title; } ?>
+		if ( !empty( $title ) ) { echo $b_title_e . $classes . '">' . $title . $after_title; } ?>
 			<div class="textwidget <?php echo $div_classes;?>"><?php echo !empty( $instance['filter'] ) ? wpautop( $text ) : $text; ?></div>
 		<?php
 		echo $after_widget;
